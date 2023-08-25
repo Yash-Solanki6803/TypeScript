@@ -131,6 +131,20 @@ Now lets say you don't want the compiler to compile the code if there is a types
   "noEmitOnError": true,
 ```
 
+Also if you don't want this configuration globally then you can run this command in your terminal.
+
+This will only compile the file if there is no error.
+```bash
+  tsc <filename>.ts --noEmitOnError
+```
+
+or
+
+This will watch for changes in the file and compile it only if there is no error.
+```bash
+  tsc  --noEmitOnError -w
+```
+
 
 
 ### String
