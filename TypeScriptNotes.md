@@ -1,7 +1,7 @@
 # Typescript
 
 ## Getting Started
- 
+
 ### Install Typescript
 
 ```bash
@@ -17,6 +17,7 @@ tsc <filename>.ts
 ```bash
 tsc <filename>.ts <filename>.js
 ```
+
 _The second filename is the destination file, if you don't specify it, it will be the same as the first filename_
 
 ```bash
@@ -25,7 +26,7 @@ tsc <filename>.ts --watch
 
 _The --watch flag tells the compiler to watch for changes in the file and compile it automatically_
 
-__Now the question arises what if we want to compile the js file and put it somewhere else?.__
+**Now the question arises what if we want to compile the js file and put it somewhere else?.**
 
 You need a tsconfig file for this.
 
@@ -35,7 +36,7 @@ You need a tsconfig file for this.
   tsc --init
 ```
 
-__NOTE__ : If the above code gives you error then use the following code
+**NOTE** : If the above code gives you error then use the following code
 
 ```bash
   tsc.cmd --init
@@ -45,10 +46,9 @@ This is because the tsc command is not recognized by the system. So we need to u
 
 tsc is a bash script that calls node with the tsc.js file. The tsc.cmd is a windows batch file that calls node with the tsc.js file.
 
-This will create a tsconfig.json file in your project directory. 
+This will create a tsconfig.json file in your project directory.
 
-
-__Once you have your tsconfig.js file ready you need to open it and change the following properties__
+**Once you have your tsconfig.js file ready you need to open it and change the following properties**
 
 rootDir: This is the directory where your typescript files are located.
 
@@ -69,7 +69,6 @@ Now that this configuration is done, you can go ahead and compile your typescrip
 ```
 
 This will keep watching for changes in your typescript files and compile them automatically.
-
 
 ### Run Typescript
 
@@ -109,7 +108,9 @@ const sum = (a,b)=>{
 let a = 12;
 let b = '6';
 
-//now if i run this , i will get 126 as output as 6 is string . As a user is very unpredictable , there is a chance that you can get a string as input. TypeScript warns you here that  there is a chance that any other datatype. 
+//now if i run this , i will get 126 as output as 6 is string .
+// As a user is very unpredictable , there is a chance that you can get a string as input.
+// TypeScript warns you here that  there is a chance that any other datatype.
 
 console.log(sum(a,b));
 
@@ -119,7 +120,9 @@ const add = (a:number,b:number):number{
   return (a+b);
 }
 
-//Thus Now in the  method signature , a and b are declared as  numbers , also the return type of the function is also declared as a number so we make sure that the function doesn't perform concatenation.
+//Thus Now in the  method signature , a and b are declared as  numbers ,
+// also the return type of the function is also declared as a number
+//so we make sure that the function doesn't perform concatenation.
 
 
 
@@ -134,6 +137,7 @@ Now lets say you don't want the compiler to compile the code if there is a types
 Also if you don't want this configuration globally then you can run this command in your terminal.
 
 This will only compile the file if there is no error.
+
 ```bash
   tsc <filename>.ts --noEmitOnError
 ```
@@ -141,11 +145,10 @@ This will only compile the file if there is no error.
 or
 
 This will watch for changes in the file and compile it only if there is no error.
+
 ```bash
   tsc  --noEmitOnError -w
 ```
-
-
 
 ### String
 
@@ -175,12 +178,23 @@ x = [10, "hello"]; // Error
 
 ### Enum
 
+Enums stands for Enumerations. Enums are a new data type supported in TypeScript. It is used to define the set of named constants, i.e., a collection of related values. TypeScript supports both numeric and string-based enums. We can define the enums by using the enum keyword.
+
 ```typescript
 enum Color {
   Red,
   Green,
   Blue
 }
+
+* Enums are useful in TypeScript because of the following:
+
+    * It makes it easy to change values in the future.
+    * It reduces errors which are caused by transporting or mistyping a number.
+    * It exists only during compilation time, so it does not allocate memory.
+    * It saves runtime and compile-time with inline code in JavaScript.
+    * It allows us to create constants that we can easily relate to the program.
+    * It will enable developers to develop memory-efficient custom constants in JavaScript, which does not support enums, but TypeScript helps us to access them.
 
 let c: Color = Color.Green;
 ```
@@ -196,6 +210,8 @@ notSure = false; // okay, definitely a boolean
 ```
 
 ### Void
+
+The void data types means that the var doesn't have any type. It is used in functions that don't return anything.
 
 ```typescript
 function warnUser(): void {
@@ -213,6 +229,9 @@ let n: null = null;
 
 ### Never
 
+The never type is used when you are sure that something is never going to occur.
+For example, you write a function that throws an error, then the return type of the function will be never.
+
 ```typescript
 function error(message: string): never {
   throw new Error(message);
@@ -225,6 +244,27 @@ function fail() {
 function infiniteLoop(): never {
   while (true) {}
 }
+```
+
+### Union
+
+If you want a var to possess more than one type, then you can use the union type.
+
+```typescript
+let unionType: number | string;
+unionType = 1; // OK
+unionType = "Hello"; // OK
+unionType = false; // Compiler Error: Type 'boolean' is not assignable to type 'string | number'
+```
+
+### Regular Expression
+
+```typescript
+let reg: RegExp = new RegExp("ab+c");
+```
+
+```typescript
+let reg: RegExp = /\w+/g;
 ```
 
 ### Object
@@ -334,7 +374,7 @@ interface SearchFunc {
 }
 
 let mySearch: SearchFunc;
-mySearch = function(src: string, sub: string): boolean {
+mySearch = function (src: string, sub: string): boolean {
   let result = src.search(sub);
   return result > -1;
 };
@@ -392,9 +432,9 @@ interface Counter {
 }
 
 function getCounter(): Counter {
-  let counter = <Counter>function(start: number) {};
+  let counter = <Counter>function (start: number) {};
   counter.interval = 123;
-  counter.reset = function() {};
+  counter.reset = function () {};
   return counter;
 }
 
@@ -435,4 +475,3 @@ class Location {}
 ## Classes
 
 ### Basic
-
