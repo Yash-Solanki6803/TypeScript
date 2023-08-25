@@ -1,7 +1,7 @@
 # Typescript
 
 ## Getting Started
-
+ 
 ### Install Typescript
 
 ```bash
@@ -13,6 +13,63 @@ npm install -g typescript
 ```bash
 tsc <filename>.ts
 ```
+
+```bash
+tsc <filename>.ts <filename>.js
+```
+_The second filename is the destination file, if you don't specify it, it will be the same as the first filename_
+
+```bash
+tsc <filename>.ts --watch
+```
+
+_The --watch flag tells the compiler to watch for changes in the file and compile it automatically_
+
+__Now the question arises what if we want to compile the js file and put it somewhere else?.__
+
+You need a tsconfig file for this.
+
+### tsconfig.json
+
+```bash
+  tsc --init
+```
+
+__NOTE__ : If the above code gives you error then use the following code
+
+```bash
+  tsc.cmd --init
+```
+
+This is because the tsc command is not recognized by the system. So we need to use the tsc.cmd command.
+
+tsc is a bash script that calls node with the tsc.js file. The tsc.cmd is a windows batch file that calls node with the tsc.js file.
+
+This will create a tsconfig.json file in your project directory. 
+
+
+__Once you have your tsconfig.js file ready you need to open it and change the following properties__
+
+rootDir: This is the directory where your typescript files are located.
+
+```json
+  "rootDir": "./src",
+```
+
+outDir: This is the directory where you want your js files to be compiled.
+
+```json
+  "outDir": "./dist",
+```
+
+Now that this configuration is done, you can go ahead and compile your typescript files using the following command.
+
+```bash
+  tsc -w
+```
+
+This will keep watching for changes in your typescript files and compile them automatically.
+
 
 ### Run Typescript
 
@@ -39,6 +96,42 @@ let binary: number = 0b1010;
 
 let octal: number = 0o744;
 ```
+
+### How to use these numbers?
+
+```typescript
+//Let's say i want to call a function to add two numbers
+
+const sum = (a,b)=>{
+  return (a+b)
+}
+
+let a = 12;
+let b = '6';
+
+//now if i run this , i will get 126 as output as 6 is string . As a user is very unpredictable , there is a chance that you can get a string as input. TypeScript warns you here that  there is a chance that any other datatype. 
+
+console.log(sum(a,b));
+
+//TypeScript way of declaring this function
+
+const add = (a:number,b:number):number{
+  return (a+b);
+}
+
+//Thus Now in the  method signature , a and b are declared as  numbers , also the return type of the function is also declared as a number so we make sure that the function doesn't perform concatenation.
+
+
+
+```
+
+Now lets say you don't want the compiler to compile the code if there is a typescript warning .Search and uncomment the following in the tsconfig file.
+
+```json
+  "noEmitOnError": true,
+```
+
+
 
 ### String
 
