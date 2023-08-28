@@ -575,3 +575,27 @@ class Image implements SelectableControl {
 
 class Location {}
 ```
+
+## Classes
+
+### Class Constructor
+
+You need to define the type of both instance variables and the constructor arguments.
+
+```typescript
+class Coder {
+  name: string;
+  //If we don't want to initialize the variable in the constructor then we need to make it not-null using assertions
+  music!: string;
+  //If we don't want to initialize the variable in the constructor then we need to make it optional using ?
+  age?: number;
+  lang: string;
+
+  constructor(name: string, music: string, age: number, lang: string) {
+    this.name = name;
+    this.music = music;
+    this.age = age;
+    this.lang = lang;
+  }
+}
+```
