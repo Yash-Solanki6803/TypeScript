@@ -96,7 +96,7 @@ let binary: number = 0b1010;
 let octal: number = 0o744;
 ```
 
-### How to use these numbers?
+#### How to use these numbers?
 
 ```typescript
 //Let's say i want to call a function to add two numbers
@@ -163,24 +163,10 @@ color = "red";
 ```typescript
 let list: number[] = [1, 2, 3];
 
-let list: [number | string | boolean] = [1, "dad", true];
+let list: (number | string | boolean)[] = [1, "dad", true];
 
 let list: Array<number> = [1, 2, 3];
 ```
-
-### Object
-
-````typescript
-
-type User = {
-  name:string,
-  age:number
-}
-
-let obj:User = {
-  name:"John",
-  age:20
-}
 
 ### Tuple
 
@@ -192,7 +178,7 @@ let x: [string, number];
 x = ["hello", 10]; // OK
 
 x = [10, "hello"]; // Error
-````
+```
 
 ### Enum
 
@@ -334,7 +320,77 @@ let hello = "Hello!";
 const numLivesForCat = 9;
 ```
 
+## Type Alias
+
+You can make custom types in typescript. This is very useful when you want to define the type of a variable.
+
+```typescript
+type stringOrNumber = string | Number;
+
+let a: stringOrNumber = 1;
+```
+
+You can make custom object types in typescript. This is very useful when you want to define the type of a variable.
+
+But you need to make sure that the object you are assigning to the variable has the same structure as the object type.
+
+```typescript
+type User = {
+  name: string;
+  age: number;
+};
+
+let obj: User = {
+  name: "John",
+  age: 20,
+};
+```
+
+In order to make the properties optional , you can use the following syntax using `?`
+
+```typescript
+type User = {
+  name: string;
+  age?: number;
+};
+```
+
+This can also be passed as a argument to a function.
+
+```typescript
+type User = {
+  name: string;
+  age?: number;
+};
+
+function printUser(user: User) {
+  console.log(user.name);
+}
+
+printUser({ name: "John" });
+```
+
+Same can be done for functions as well
+
+```typescript
+type mathFunction = (a: number, b: number) => number;
+
+let add: mathFunction = (a, b) => {
+  return a + b;
+};
+```
+
+You can also use interfaces to define method signature type
+
+```typescript
+interface mathFunction {
+  (a: number, b: number): number;
+}
+```
+
 ## Interfaces
+
+It is similar to defining a custom type.
 
 ```typescript
 interface LabelledValue {
@@ -381,20 +437,6 @@ interface Point {
 
 let p1: Point = { x: 10, y: 20 };
 p1.x = 5; // error!
-```
-
-### Function Types
-
-```typescript
-interface SearchFunc {
-  (source: string, subString: string): boolean;
-}
-
-let mySearch: SearchFunc;
-mySearch = function (src: string, sub: string): boolean {
-  let result = src.search(sub);
-  return result > -1;
-};
 ```
 
 ### Indexable Types
@@ -488,7 +530,3 @@ class Image implements SelectableControl {
 
 class Location {}
 ```
-
-## Classes
-
-### Basic
