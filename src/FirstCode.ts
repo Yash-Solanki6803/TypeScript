@@ -24,4 +24,10 @@ add(a,c);
 //Thus Now in the  method signature , a and b are declared as  numbers , also the return type of the function is also declared as a number so we make sure that the function doesn't perform concatenation.
 
 
+// Year using assertions
 
+const year = document.getElementById("year")!
+
+const thisYear  = new Date().getFullYear();
+year.setAttribute("datetime",thisYear.toString())  
+year.textContent = thisYear.toString()
