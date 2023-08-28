@@ -233,7 +233,7 @@ let n: null = null;
 ### Never
 
 The never type is used when you are sure that something is never going to occur.
-For example, you write a function that throws an error, then the return type of the function will be never.
+For example, you write a function that throws an error, then the return type of the function will be never or a function which has an endless loop will also return never.
 
 ```typescript
 function error(message: string): never {
@@ -290,14 +290,32 @@ create(undefined); // Error
 
 ### Type assertions
 
+When you know more about the type of a variable than TypeScript does, you can use a type assertion to specify a more or less specific type.
+
+**Making type more specific.**
+
 ```typescript
 let someValue: any = "this is a string";
 
-let strLength: number = (<string>someValue).length;
-
-let someValue: any = "this is a string";
-
 let strLength: number = (someValue as string).length;
+```
+
+**Making type less specific.**
+
+```typescript
+let someValue: string = "this is a string";
+type stringOrNum = string | number;
+
+let strLength = someValue as stringOrNum;
+```
+
+**Non-Null assertion**
+
+Using an `!` after a variable name in typescript tells the compiler that the variable is not null or undefined.
+
+```typescript
+let someValue: string = "this is a string";
+let strLength = someValue!.length;
 ```
 
 ## Variable Declarations
@@ -320,7 +338,27 @@ let hello = "Hello!";
 const numLivesForCat = 9;
 ```
 
+### Function declarations using rest parameters
+
+You can use rest parameter to pass multiple arguments to a function.
+
+```typescript
+function buildName(firstName: string, ...restOfName: string[]) {
+  return firstName + " " + restOfName.join(" ");
+}
+
+let employeeName = buildName("Joseph", "Samuel", "Lucas", "MacKinzie");
+```
+
+```typescript
+const total = (...nums: number[]): number => {
+  return nums.reduce((prev, curr) => prev + curr);
+};
+```
+
 ## Type Alias
+
+### Variable Type Alias
 
 You can make custom types in typescript. This is very useful when you want to define the type of a variable.
 
@@ -329,6 +367,8 @@ type stringOrNumber = string | Number;
 
 let a: stringOrNumber = 1;
 ```
+
+### Object Type Alias
 
 You can make custom object types in typescript. This is very useful when you want to define the type of a variable.
 
@@ -369,6 +409,8 @@ function printUser(user: User) {
 
 printUser({ name: "John" });
 ```
+
+### Function Type Alias
 
 Same can be done for functions as well
 
@@ -413,7 +455,10 @@ interface SquareConfig {
   width?: number;
 }
 
-function createSquare(config: SquareConfig): { color: string; area: number } {
+//Note : The ? is used to make the properties optional.
+//They must be declared after the required properties.
+
+function createSquare(config: SquareConfig): { color: string; area?: number } {
   let newSquare = { color: "white", area: 100 };
   if (config.color) {
     newSquare.color = config.color;
