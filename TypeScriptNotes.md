@@ -163,10 +163,28 @@ color = "red";
 ```typescript
 let list: number[] = [1, 2, 3];
 
+let list: [number | string | boolean] = [1, "dad", true];
+
 let list: Array<number> = [1, 2, 3];
 ```
 
+### Object
+
+````typescript
+
+type User = {
+  name:string,
+  age:number
+}
+
+let obj:User = {
+  name:"John",
+  age:20
+}
+
 ### Tuple
+
+This is used when you have fixed number of elements in an array and the data type of each element is known.
 
 ```typescript
 let x: [string, number];
@@ -174,7 +192,7 @@ let x: [string, number];
 x = ["hello", 10]; // OK
 
 x = [10, "hello"]; // Error
-```
+````
 
 ### Enum
 
@@ -184,20 +202,19 @@ Enums stands for Enumerations. Enums are a new data type supported in TypeScript
 enum Color {
   Red,
   Green,
-  Blue
+  Blue,
 }
-
-* Enums are useful in TypeScript because of the following:
-
-    * It makes it easy to change values in the future.
-    * It reduces errors which are caused by transporting or mistyping a number.
-    * It exists only during compilation time, so it does not allocate memory.
-    * It saves runtime and compile-time with inline code in JavaScript.
-    * It allows us to create constants that we can easily relate to the program.
-    * It will enable developers to develop memory-efficient custom constants in JavaScript, which does not support enums, but TypeScript helps us to access them.
-
 let c: Color = Color.Green;
 ```
+
+- Enums are useful in TypeScript because of the following:
+
+  - It makes it easy to change values in the future.
+  - It reduces errors which are caused by transporting or mistyping a number.
+  - It exists only during compilation time, so it does not allocate memory.
+  - It saves runtime and compile-time with inline code in JavaScript.
+  - It allows us to create constants that we can easily relate to the program.
+  - It will enable developers to develop memory-efficient custom constants in JavaScript, which does not support enums, but TypeScript helps us to access them.
 
 ### Any
 
