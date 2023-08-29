@@ -486,15 +486,33 @@ p1.x = 5; // error!
 
 ### Indexable Types
 
+Also referred to as index signature.
+
+The below code is used to define the type of the index of the array . So the below code says that the index of the array should be a string and the value should be a number.
+
 ```typescript
-interface StringArray {
-  [index: number]: string;
+interface NumArray {
+  [index: string]: number;
+  Pizza: number;
+  Burger: number;
 }
 
-let myArray: StringArray;
-myArray = ["Bob", "Fred"];
+let myArray: NumArray;
+myArray = { Pizza: 1, Burger: 2 };
 
-let myStr: string = myArray[0];
+let myStr: number = myArray["Pizza"];
+
+//Now this can be accessed in multiple ways.
+
+function logFoodkey(myArray: NumArray, key: keyOf NumArray) {
+  console.log(`The value of ${key} is ${myArray[key]}`);
+}
+```
+
+```typescript
+type Streams = "salary" | "bonus" | "side_hustle";
+
+type Incomes = Record<Streams, number>;
 ```
 
 ### Class Types
