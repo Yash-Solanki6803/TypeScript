@@ -617,3 +617,42 @@ class Coder {
   }
 }
 ```
+
+## Generics
+
+Generics is a way to make components work with any data type and not restrict to one data type.
+
+### Generic Functions
+
+```typescript
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+/////////////////  or  //////////////////////
+
+const echo = <T>(arg: T): T => {
+  return arg;
+};
+```
+
+Now you can use Generics to define a function that returns true if the argument is a non empty variable.
+
+```typescript
+
+const isObj = <T>(obj: T): boolean => {
+  return typeof obj === "object" && obj !== null && !Array.isArray(obj);
+};
+
+const isTrue = <T>(arg:T):{arg:<T>, is:boolean} =>{
+  if(Array.isArray(arg) && !arg.length){
+    return {arg, is:false}
+  }
+
+  if(isObj(arg) && !Object.keys(arg as keyof T).length){
+    return {arg, is:false}
+  }
+
+  return {arg, is:!!arg}
+}
+```
