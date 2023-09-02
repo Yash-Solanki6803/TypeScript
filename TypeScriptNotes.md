@@ -656,3 +656,128 @@ const isTrue = <T>(arg:T):{arg:<T>, is:boolean} =>{
   return {arg, is:!!arg}
 }
 ```
+
+Now we can use `K` to define the type of the key and `T` to define the type of the object.
+
+```typescript
+const get = <T, K extends keyof T>(obj: T, key: K) => {
+  return obj[key];
+};
+```
+
+## Utility Types
+
+### Partial
+
+Partial is used to make all the properties of an object optional.
+
+```typescript
+interface Todo {
+  title: string;
+  description: string;
+}
+
+//This allows us to not pass in all of the props but declare
+//that they props of the interface todo.
+//This basically means that `fieldsToUpdate` is a part of the interface Todo
+
+function updateTodo(todo: Todo, fieldsToUpdate: Partial<Todo>): Todo {
+  return { ...todo, ...fieldsToUpdate };
+}
+
+const todo1 = {
+  title: "organize desk",
+  description: "clear clutter",
+};
+
+const todo2 = updateTodo(todo1, {
+  description: "throw out trash",
+});
+```
+
+### Required
+
+Required is used to make all the properties of an object required.
+
+```typescript
+interface Props {
+  a?: number;
+  b?: string;
+}
+
+const obj: Props = { a: 5 };
+
+const obj2: Required<Props> = { a: 5, b: "hello" };
+```
+
+### Readonly
+
+Readonly is used to make all the properties of an object readonly.
+
+```typescript
+interface Todo {
+  title: string;
+}
+
+const todo: Readonly<Todo> = {
+  title: "Delete inactive users",
+};
+
+todo.title = "Hello"; // Error: cannot reassign a readonly property
+```
+
+### Record
+
+Record is used to define the type of the index of the array . So the below code says that the index of the array should be a string and the value should be a number.
+
+```typescript
+type Streams = "salary" | "bonus" | "side_hustle";
+
+type Incomes = Record<Streams, number>;
+```
+
+### Pick
+
+Pick is used to pick a subset of properties from an object.
+
+```typescript
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+type TodoPreview = Pick<Todo, "title" | "completed">;
+
+const todo: TodoPreview = {
+  title: "Clean room",
+  completed: false,
+};
+```
+
+### Omit
+
+Omit is used to omit a subset of properties from an object.
+
+```typescript
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+type TodoPreview = Omit<Todo, "description">;
+
+const todo: TodoPreview = {
+  title: "Clean room",
+  completed: false,
+};
+```
+
+### Exclude
+
+Exclude is used to exclude a subset of properties from an object.
+
+```typescript
+
+```
